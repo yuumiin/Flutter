@@ -1,6 +1,10 @@
 import 'dart:async';
 // import 'package:ai_project/CheckDiet/check_diet.dart';
 // import 'package:ai_project/MemberInfo/input_info.dart';
+// import 'package:ai_project/CheckDiet/tabbar_ui.dart';
+import 'package:ai_project/sub_main.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:ai_project/Login/Login.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/auth.dart';
@@ -9,6 +13,7 @@ import 'package:kakao_flutter_sdk/user.dart';
 import 'CheckDiet/check_diet.dart';
 import 'CheckDiet/date_select.dart';
 import 'Login/kakao_login.dart';
+import 'MemberInfo/input_info.dart';
 // import 'Login/Login.dart';
 // import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -24,8 +29,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      // title: 'Flutter Demo',
+      // theme: ThemeData(primarySwatch: Colors.blue),
 
       // localizationsDelegates: [
       //   GlobalMaterialLocalizations.delegate,
@@ -50,10 +55,10 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // return Login();
     // return StartPage();
-    return CheckDiet();
-    // return InputInfo();
-    // return DateSelect();
+    // return CheckDiet();
+    return InputInfo();
   }
 }
 
@@ -87,18 +92,18 @@ class _StartPageState extends State<StartPage> {
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     print(userInfo);
 
-    // if (userInfo != null) {
-    //   // 로그인한 값이 저장됐으면
-    //   Timer(
-    //     Duration(seconds: 3),
-    //     () => Navigator.pushReplacement(
-    //       context,
-    //       MaterialPageRoute(
-    //         builder: (context) => CheckDiet(),
-    //       ),
-    //     ),
-    //   );
-    // }
+    if (userInfo != null) {
+      // 로그인한 값이 저장됐으면
+      Timer(
+        Duration(seconds: 3),
+        () => Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SubMain(),
+          ),
+        ),
+      );
+    }
   }
 
   @override

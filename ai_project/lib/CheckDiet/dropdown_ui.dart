@@ -14,6 +14,7 @@ class _DropDownUIState extends State<DropDownUI> {
     setState(() {
       enableList = !enableList;
     });
+    print(enableList);
   }
 
   List<Map> _testList = [
@@ -29,70 +30,67 @@ class _DropDownUIState extends State<DropDownUI> {
     });
   }
 
-  Widget _buildSearchList() => Center(
-        child: Container(
-          // color: Colors.orange,
-          width: 150,
-          height: 150.0,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey, width: 1),
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            color: Colors.white,
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-          margin: EdgeInsets.only(top: 5.0),
-          child: ListView.builder(
-              padding: const EdgeInsets.all(0),
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              physics: BouncingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics()),
-              itemCount: _testList.length,
-              itemBuilder: (context, position) {
-                return InkWell(
-                  onTap: () {
-                    _onChanged(position);
-                  },
-                  child: Container(
-                      // color: Colors.red,
-                      // padding: widget.padding,
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 10.0),
-                      decoration: BoxDecoration(
-                          color: position == _selectedIndex
-                              ? Colors.grey[100]
-                              : Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(4.0))),
-                      child: Text(
-                        _testList[position]['keyword'],
-                        style: TextStyle(color: Colors.black),
-                      )),
-                );
-              }),
+  Widget _buildSearchList() => Container(
+        // height: 40,
+        // color: Colors.amber,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey, width: 1),
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          color: Colors.white,
         ),
+        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        margin: EdgeInsets.only(top: 5.0),
+
+        child: ListView.builder(
+            padding: const EdgeInsets.all(0),
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            // physics: const BouncingScrollPhysics(
+            //     parent: AlwaysScrollableScrollPhysics()),
+            itemCount: _testList.length,
+            itemBuilder: (context, position) {
+              return InkWell(
+                onTap: () {
+                  _onChanged(position);
+                },
+                child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0, vertical: 8.0),
+                    decoration: BoxDecoration(
+                        color: position == _selectedIndex
+                            ? Colors.grey[100]
+                            : Colors.white,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(4.0))),
+                    child: Text(
+                      _testList[position]['keyword'],
+                      style: const TextStyle(color: Colors.black),
+                    )),
+              );
+            }),
       );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-            InkWell(
-              onTap: _onhandleTap,
+      body: Column(
+        children: <Widget>[
+          Container(
+            color: Colors.black,
+            // height: 40,
+            child: InkWell(
+              onTap: _onhandleTap, // enableList = true
               child: Container(
-                // color: Colors.blue,
-                width: 120, //// 여기만 바꿔서 크기 조정
+                // alignment: Alignment.,
                 decoration: BoxDecoration(
                   border: Border.all(
                       color: enableList ? Colors.black : Colors.grey,
                       width: 1.5),
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  borderRadius: const BorderRadius.all(Radius.circular(15)),
                   color: Colors.white,
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                height: 48.0,
+                padding: const EdgeInsets.symmetric(horizontal: 10.0), // 화살표 패딩
+                height: 40.0,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.min,
@@ -102,18 +100,26 @@ class _DropDownUIState extends State<DropDownUI> {
                       _selectedIndex != null
                           ? _testList[_selectedIndex!]['keyword']
                           : "시간 선택",
-                      style: TextStyle(fontSize: 14.0),
+                      style: const TextStyle(fontSize: 14.0),
                       textAlign: TextAlign.center,
                     )),
-                    Icon(Icons.expand_more,
+                    const Icon(Icons.expand_more,
                         size: 24.0, color: Color(0XFFbbbbbb)),
                   ],
                 ),
               ),
             ),
-            enableList ? _buildSearchList() : Container(),
-          ],
-        ),
+          ),
+          // Container(
+          //   decoration: BoxDecoration(
+          //     border: Border.all(color: Colors.grey, width: 1),
+          //     borderRadius: BorderRadius.all(Radius.circular(5)),
+          //     color: Colors.white,
+          //   ),
+          // )
+          // _buildSearchList()
+          enableList ? _buildSearchList() : Container(color: Colors.amber),
+        ],
       ),
     );
   }

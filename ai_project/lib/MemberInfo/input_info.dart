@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 
+import '../sub_main.dart';
+
 class InputInfo extends StatefulWidget {
   const InputInfo({Key? key}) : super(key: key);
 
@@ -31,6 +33,11 @@ class _InputInfoState extends State<InputInfo> {
     print('몸무게:' + member_weight.value.text.toString());
     print('나이:' + member_age.value.text.toString());
     print('성별:' + segments[currentSegment].toString());
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -63,7 +70,7 @@ class _InputInfoState extends State<InputInfo> {
                     ),
                     Container(
                       height: 1.5,
-                      width: 400,
+                      width: MediaQuery.of(context).size.width,
                       color: Colors.grey[350],
                     ),
                     Container(
@@ -178,7 +185,6 @@ class _InputInfoState extends State<InputInfo> {
                 // width: double.infinity,
                 width: MediaQuery.of(context).size.width,
                 height: 55,
-
                 child: FlatButton(
                   color: Colors.grey[300],
                   shape: RoundedRectangleBorder(
@@ -187,8 +193,10 @@ class _InputInfoState extends State<InputInfo> {
                   ),
                   onPressed: () {
                     text_print();
+                    // Navigator.of(context).pushReplacement(
+                    //     MaterialPageRoute(builder: (context) => CheckDiet()));
                     Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => CheckDiet()));
+                        MaterialPageRoute(builder: (context) => SubMain()));
                   },
                   child: Text(
                     '저장',

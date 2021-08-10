@@ -1,10 +1,7 @@
 import 'package:ai_project/CheckDiet/dropdown_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/cupertino.dart';
-// import 'package:share/share.dart';
-// import 'package:intl/intl.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class CheckDiet extends StatefulWidget {
@@ -19,6 +16,13 @@ class _CheckDietState extends State<CheckDiet> {
   String _date = "날짜 선택";
   final _valueList = ['아침', '점심', '저녁'];
   var _selectedValue;
+  CupertinoTabBar? tabBar;
+  DropDownUI a = const DropDownUI();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +30,7 @@ class _CheckDietState extends State<CheckDiet> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('식단관리앱'),
+        backgroundColor: Color(0xFF151026),
         centerTitle: true,
         elevation: 0.0, // 그림자생김
         actions: <Widget>[
@@ -39,81 +44,94 @@ class _CheckDietState extends State<CheckDiet> {
           ),
         ], // 1개 이상의 위젯 리스트를 가짐
       ),
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            height: 8,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
+      body: Container(
+        // color: Colors.amber,
+        // height: 100,
+        child: Container(
+          child: Column(
             children: [
-              SizedBox(
-                width: 8,
-              ),
               Container(
-                child: Expanded(
-                  child: OutlinedButton.icon(
-                    onPressed: () {
-                      datePicker(context);
-                    },
-                    icon: Icon(
-                      Icons.date_range,
-                      color: Colors.black,
-                      size: 30,
-                    ),
-                    label: Text(
-                      _date,
-                      style: TextStyle(color: Colors.black, fontSize: 14),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      side: BorderSide(width: 1.5, color: Colors.grey),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+                // height: 400,
+                margin: EdgeInsets.only(top: 6),
+                color: Colors.purple,
+                child: Center(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          // color: Colors.cyan,
+                          margin: EdgeInsets.only(left: 8),
+                          height: 40,
+                          // color: Colors.blueGrey,
+                          child: OutlinedButton.icon(
+                            onPressed: () {
+                              datePicker(context);
+                            },
+                            icon: const Icon(
+                              Icons.date_range,
+                              color: Colors.black,
+                              size: 25,
+                            ),
+                            label: Text(
+                              _date,
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 14),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              side: const BorderSide(
+                                  width: 1.5, color: Colors.grey),
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(15), // <-- Radius
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 8, right: 8),
+                          // padding: EdgeInsets.only(left: 8),
+                          width: 120,
+                          height: 40,
+                          // color: Colors.red,
+                          child: const DropDownUI(),
+                        ),
+                      ),
+                      Container(
+                        // color: Colors.red,
+                        margin: const EdgeInsets.only(right: 8),
+                        height: 40,
+                        width: 70,
+                        child: RaisedButton(
+                          child: const Text(
+                            '조회',
+                            style: TextStyle(
+                                fontSize: 17,
+                                fontFamily: 'NanumSquareRound',
+                                fontWeight: FontWeight.w700),
+                          ),
+                          onPressed: () {},
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          color: Colors.red[100],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-              SizedBox(
-                width: 8,
-              ),
-              // DropDownUI(),
-              // Expanded(child: DropDownUI()),
-              SizedBox(
-                width: 8,
-              ),
-              RaisedButton(
-                child: Text(
-                  '조회',
-                  style: TextStyle(
-                      fontSize: 17,
-                      fontFamily: 'NanumSquareRound',
-                      fontWeight: FontWeight.w700),
-                ),
-                onPressed: () {},
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                color: Colors.red[100],
-              ),
-              SizedBox(
-                width: 8,
+              Container(
+                margin: EdgeInsets.only(top: 8),
+                height: 1.5,
+                width: MediaQuery.of(context).size.width - 20,
+                color: Colors.grey[350],
               ),
             ],
           ),
-          SizedBox(
-            height: 8,
-          ),
-          Container(
-            height: 1.5,
-            width: MediaQuery.of(context).size.width - 40,
-            color: Colors.grey[350],
-          ),
-          Expanded(child: DropDownUI()),
-        ],
+        ),
       ),
     );
   }
