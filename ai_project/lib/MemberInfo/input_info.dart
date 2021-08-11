@@ -58,8 +58,8 @@ class _InputInfoState extends State<InputInfo> {
                     Container(
                       alignment: Alignment.center,
                       // color: Colors.red,
-                      margin: EdgeInsets.all(50),
-                      child: Text(
+                      margin: const EdgeInsets.all(50),
+                      child: const Text(
                         '개인 맞춤 서비스를 위해\n신체 정보를 꼭 입력해주세요!',
                         style: TextStyle(
                             fontSize: 18,
@@ -80,19 +80,19 @@ class _InputInfoState extends State<InputInfo> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             '키',
                             style: TextStyle(
                                 fontSize: 17, fontFamily: 'NanumSquare'),
                             textAlign: TextAlign.center,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           TextField(
                             keyboardType: TextInputType.number,
                             controller: member_height,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 contentPadding: EdgeInsets.all(10),
                                 border: OutlineInputBorder(
                                   borderRadius:
@@ -100,22 +100,22 @@ class _InputInfoState extends State<InputInfo> {
                                 ),
                                 labelText: 'cm'),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
-                          Text(
+                          const Text(
                             '체중',
                             style: TextStyle(
                                 fontSize: 17, fontFamily: 'NanumSquare'),
                             textAlign: TextAlign.center,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           TextField(
                             keyboardType: TextInputType.number,
                             controller: member_weight,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 contentPadding: EdgeInsets.all(10),
                                 border: OutlineInputBorder(
                                   borderRadius:
@@ -123,22 +123,22 @@ class _InputInfoState extends State<InputInfo> {
                                 ),
                                 labelText: 'kg'),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
-                          Text(
+                          const Text(
                             '나이',
                             style: TextStyle(
                                 fontSize: 17, fontFamily: 'NanumSquare'),
                             textAlign: TextAlign.center,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           TextField(
                             keyboardType: TextInputType.number,
                             controller: member_age,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 contentPadding: EdgeInsets.all(10),
                                 border: OutlineInputBorder(
                                   borderRadius:
@@ -146,19 +146,19 @@ class _InputInfoState extends State<InputInfo> {
                                 ),
                                 labelText: '세'),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
-                          Text(
+                          const Text(
                             '성별',
                             style: TextStyle(
                                 fontSize: 17, fontFamily: 'NanumSquare'),
                             textAlign: TextAlign.center,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
-                          Container(
+                          SizedBox(
                             width: MediaQuery.of(context).size.width,
                             child: Expanded(
                               child: CupertinoSlidingSegmentedControl<int>(

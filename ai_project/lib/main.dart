@@ -1,21 +1,12 @@
 import 'dart:async';
-// import 'package:ai_project/CheckDiet/check_diet.dart';
-// import 'package:ai_project/MemberInfo/input_info.dart';
-// import 'package:ai_project/CheckDiet/tabbar_ui.dart';
 import 'package:ai_project/sub_main.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:ai_project/Login/Login.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/auth.dart';
 import 'package:kakao_flutter_sdk/link.dart';
 import 'package:kakao_flutter_sdk/user.dart';
-import 'CheckDiet/check_diet.dart';
-import 'CheckDiet/date_select.dart';
 import 'Login/kakao_login.dart';
-import 'MemberInfo/input_info.dart';
-// import 'Login/Login.dart';
-// import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   KakaoContext.clientId = '29ee70f50723021973ddf4f7aca15436';
@@ -56,9 +47,9 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // return Login();
-    // return StartPage();
-    // return CheckDiet();
-    return InputInfo();
+    return StartPage();
+    // return SubMain();
+    // return InputInfo();
   }
 }
 
@@ -110,7 +101,7 @@ class _StartPageState extends State<StartPage> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: Scaffold(
+      child: const Scaffold(
         body: Center(
           child: Text(
             '인공지능\n식단관리앱',

@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
+import 'menu_button_ui.dart';
+
 class CheckDiet extends StatefulWidget {
   const CheckDiet({Key? key}) : super(key: key);
 
@@ -26,6 +28,7 @@ class _CheckDietState extends State<CheckDiet> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -45,92 +48,88 @@ class _CheckDietState extends State<CheckDiet> {
         ], // 1개 이상의 위젯 리스트를 가짐
       ),
       body: Container(
-        // color: Colors.amber,
-        // height: 100,
-        child: Container(
-          child: Column(
-            children: [
-              Container(
-                // height: 400,
-                margin: EdgeInsets.only(top: 6),
-                color: Colors.purple,
-                child: Center(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Container(
-                          // color: Colors.cyan,
-                          margin: EdgeInsets.only(left: 8),
-                          height: 40,
-                          // color: Colors.blueGrey,
-                          child: OutlinedButton.icon(
-                            onPressed: () {
-                              datePicker(context);
-                            },
-                            icon: const Icon(
-                              Icons.date_range,
-                              color: Colors.black,
-                              size: 25,
-                            ),
-                            label: Text(
-                              _date,
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 14),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              side: const BorderSide(
-                                  width: 1.5, color: Colors.grey),
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(15), // <-- Radius
-                              ),
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.only(top: 6),
+              child: Center(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        // color: Colors.cyan,
+                        margin: EdgeInsets.only(left: 8),
+                        height: 42,
+                        // color: Colors.blueGrey,
+                        child: OutlinedButton.icon(
+                          onPressed: () {
+                            datePicker(context);
+                          },
+                          icon: const Icon(
+                            Icons.date_range,
+                            color: Colors.black,
+                            size: 25,
+                          ),
+                          label: Text(
+                            '날짜 선택',
+                            style: TextStyle(color: Colors.black, fontSize: 14),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            side: const BorderSide(
+                                width: 1.5, color: Colors.grey),
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(15), // <-- Radius
                             ),
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: Container(
-                          margin: const EdgeInsets.only(left: 8, right: 8),
-                          // padding: EdgeInsets.only(left: 8),
-                          width: 120,
-                          height: 40,
-                          // color: Colors.red,
-                          child: const DropDownUI(),
+                    ),
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey, width: 0),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(15)),
+                        ),
+                        margin: const EdgeInsets.only(left: 8, right: 8),
+                        child: NormalMenuButton(
+                          theme: theme,
                         ),
                       ),
-                      Container(
-                        // color: Colors.red,
-                        margin: const EdgeInsets.only(right: 8),
-                        height: 40,
-                        width: 70,
-                        child: RaisedButton(
-                          child: const Text(
-                            '조회',
-                            style: TextStyle(
-                                fontSize: 17,
-                                fontFamily: 'NanumSquareRound',
-                                fontWeight: FontWeight.w700),
-                          ),
-                          onPressed: () {},
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          color: Colors.red[100],
+                    ),
+                    Container(
+                      // color: Colors.red,
+                      margin: const EdgeInsets.only(right: 8),
+                      height: 42,
+                      width: 70,
+                      child: RaisedButton(
+                        child: const Text(
+                          '조회',
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontFamily: 'NanumSquareRound',
+                              fontWeight: FontWeight.w700),
                         ),
+                        onPressed: () {},
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        color: Colors.red[100],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(top: 8),
-                height: 1.5,
-                width: MediaQuery.of(context).size.width - 20,
-                color: Colors.grey[350],
-              ),
-            ],
-          ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 8),
+              height: 1.5,
+              width: MediaQuery.of(context).size.width - 20,
+              color: Colors.grey[350],
+            ),
+          ],
         ),
       ),
     );
