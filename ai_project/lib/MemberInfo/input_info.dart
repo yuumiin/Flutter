@@ -16,15 +16,23 @@ class InputInfo extends StatefulWidget {
 
 class _InputInfoState extends State<InputInfo> {
   String? _chosenValue;
-  int currentSegment = 0;
+  int gender_current_seg = 0;
+  int activity_current_seg = 0;
 
   TextEditingController member_height = TextEditingController();
   TextEditingController member_weight = TextEditingController();
   TextEditingController member_age = TextEditingController();
 
-  final Map<int, Widget> segments = const <int, Widget>{
+  final Map<int, Widget> gender_segments = const <int, Widget>{
     0: Text('남자'),
     1: Text('여자'),
+  };
+
+  final Map<int, Widget> activity_index_segments = const <int, Widget>{
+    0: Text('비활동적'),
+    1: Text('저활동적'),
+    2: Text('활동적'),
+    3: Text('매우 활동적')
   };
 
   void text_print() {
@@ -32,7 +40,8 @@ class _InputInfoState extends State<InputInfo> {
     print('키:' + member_height.value.text.toString());
     print('몸무게:' + member_weight.value.text.toString());
     print('나이:' + member_age.value.text.toString());
-    print('성별:' + segments[currentSegment].toString());
+    print('성별:' + gender_segments[gender_current_seg].toString());
+    print('활동 지수:' + activity_index_segments[activity_current_seg].toString());
   }
 
   @override
@@ -163,11 +172,37 @@ class _InputInfoState extends State<InputInfo> {
                             child: Expanded(
                               child: CupertinoSlidingSegmentedControl<int>(
                                   padding: EdgeInsets.all(0),
-                                  groupValue: currentSegment,
-                                  children: segments,
+                                  groupValue: gender_current_seg,
+                                  children: gender_segments,
                                   onValueChanged: (i) {
                                     setState(() {
-                                      currentSegment = i!;
+                                      gender_current_seg = i!;
+                                    });
+                                  }),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          const Text(
+                            '활동지수',
+                            style: TextStyle(
+                                fontSize: 17, fontFamily: 'NanumSquare'),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: Expanded(
+                              child: CupertinoSlidingSegmentedControl<int>(
+                                  padding: EdgeInsets.all(0),
+                                  groupValue: activity_current_seg,
+                                  children: activity_index_segments,
+                                  onValueChanged: (i) {
+                                    setState(() {
+                                      activity_current_seg = i!;
                                     });
                                   }),
                             ),
@@ -193,8 +228,6 @@ class _InputInfoState extends State<InputInfo> {
                   ),
                   onPressed: () {
                     text_print();
-                    // Navigator.of(context).pushReplacement(
-                    //     MaterialPageRoute(builder: (context) => CheckDiet()));
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => SubMain()));
                   },

@@ -7,9 +7,11 @@ import 'package:kakao_flutter_sdk/auth.dart';
 import 'package:kakao_flutter_sdk/link.dart';
 import 'package:kakao_flutter_sdk/user.dart';
 import 'Login/kakao_login.dart';
+import 'MemberInfo/input_info.dart';
 
 void main() {
   KakaoContext.clientId = '29ee70f50723021973ddf4f7aca15436';
+  KakaoContext.javascriptClientId = '4adeac62b441cd19acc2fe4b0c71775a';
   runApp(const MyApp());
 }
 

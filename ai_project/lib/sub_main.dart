@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:motion_tab_bar_v2/motion-badge.widget.dart';
 import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
@@ -127,6 +128,7 @@ class _SubMain extends State<SubMain> with TickerProviderStateMixin {
         },
       ),
       body: TabBarView(
+        dragStartBehavior: DragStartBehavior.start,
         physics:
             const NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
         controller: _tabController,
