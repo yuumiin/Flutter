@@ -49,8 +49,8 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // return Login();
-    return StartPage();
-    // return SubMain();
+    // return StartPage();
+    return SubMain();
     // return InputInfo();
   }
 }

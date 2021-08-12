@@ -20,12 +20,12 @@ class _ManagementState extends State<Management> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: Builder(
-          builder: (context) => IconButton(
-            icon: Icon(Icons.menu_rounded),
-            onPressed: () => Scaffold.of(context).openDrawer(),
-          ),
-        ),
+        // leading: Builder(
+        //   builder: (context) => IconButton(
+        //     icon: Icon(Icons.menu_rounded),
+        //     onPressed: () => Scaffold.of(context).openDrawer(),
+        //   ),
+        // ),
         title: Text('식단관리앱'),
         backgroundColor: Color(0xFF151026),
         centerTitle: true,
