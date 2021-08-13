@@ -8,14 +8,13 @@ import 'package:ai_project/MemberInfo/input_info.dart';
 
 class KakaoLogin extends StatefulWidget {
   const KakaoLogin({Key? key}) : super(key: key);
-  get logOutTalk => null;
 
   @override
   _KakaoLoginState createState() => _KakaoLoginState();
 }
 
 class _KakaoLoginState extends State<KakaoLogin> {
-  static final storage = new FlutterSecureStorage();
+  static const storage = FlutterSecureStorage();
 
   @override
   void initState() {
@@ -23,6 +22,7 @@ class _KakaoLoginState extends State<KakaoLogin> {
     _initKakaoTalkInstalled();
   }
 
+  // 카카오톡 설치 여부 확인
   _initKakaoTalkInstalled() async {
     final installed = await isKakaoTalkInstalled();
     print('kakao installed = $installed');
@@ -32,11 +32,6 @@ class _KakaoLoginState extends State<KakaoLogin> {
   }
 
   bool _isKakaoTalkInstalled = true;
-
-  // _checkAccessToken() async {
-  //   var token = await AccessTokenStore.instance.fromStore();
-  //   debugPrint(token.toString());
-  // }
 
   _loginWithKakao() async {
     try {
@@ -49,6 +44,7 @@ class _KakaoLoginState extends State<KakaoLogin> {
     }
   }
 
+  // 카카오 어플로 설치
   _loginWithTalk() async {
     try {
       var code = await AuthCodeClient.instance.requestWithTalk();
@@ -92,25 +88,6 @@ class _KakaoLoginState extends State<KakaoLogin> {
       await storage.write(key: 'login', value: userEmail);
     } catch (e) {
       print("error on issuing access token: $e");
-    }
-  }
-
-  logOutTalk() async {
-    print('호출됨!');
-    try {
-      var code = await UserApi.instance.logout();
-      print('logOutTalk code=${code.toString()}');
-    } catch (e) {
-      print('logOutTalk error=${e.toString()}');
-    }
-  }
-
-  unlinkTalk() async {
-    try {
-      var code = await UserApi.instance.unlink();
-      print('unlinkTalk code=${code.toString()}');
-    } catch (e) {
-      print('unlinkTalk error=${e.toString()}');
     }
   }
 

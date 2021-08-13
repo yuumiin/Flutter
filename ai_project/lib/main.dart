@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:ai_project/CheckDiet/check_diet.dart';
 import 'package:ai_project/sub_main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -22,35 +23,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // title: 'Flutter Demo',
-      // theme: ThemeData(primarySwatch: Colors.blue),
-
-      // localizationsDelegates: [
-      //   GlobalMaterialLocalizations.delegate,
-      //   GlobalWidgetsLocalizations.delegate,
-      // ],
-      // supportedLocales: [
-      //   const Locale('ko', 'KR'),
-      // ],
-      home: const MyHomePage(),
+      // home: MainPage(),
       // home: CheckDiet(),
-      // initialRoute: '/',
-      // routes: {
-      // '/': (context) => MyHomePage(),
-      // '/second': (context) =>
-      // },
+      initialRoute: '/',
+      routes: {
+        '/': (context) => MainPage(),
+        '/second': (context) => CheckDiet(),
+      },
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class MainPage extends StatelessWidget {
+  const MainPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // return Login();
-    // return StartPage();
-    return SubMain();
+    return const StartPage();
+    // return SubMain();
     // return InputInfo();
   }
 }
@@ -64,12 +55,13 @@ class StartPage extends StatefulWidget {
 
 class _StartPageState extends State<StartPage> {
   String userInfo = '';
-  static final storage = new FlutterSecureStorage();
+  static const storage = FlutterSecureStorage();
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      _asyncMethod();
+      loadUserLogin();
     });
     Timer(
       Duration(seconds: 3),
@@ -80,13 +72,14 @@ class _StartPageState extends State<StartPage> {
     );
   }
 
-  _asyncMethod() async {
+  // 기기에 저장된 로그인 정보 불러오기
+  loadUserLogin() async {
+    // login key값에 저장된 값 불러오기
     userInfo = (await storage.read(key: 'login'))!;
-    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     print(userInfo);
 
+    // 로그인한 값이 저장됐으면 SubMain 페이지로 이동
     if (userInfo != null) {
-      // 로그인한 값이 저장됐으면
       Timer(
         Duration(seconds: 3),
         () => Navigator.pushReplacement(

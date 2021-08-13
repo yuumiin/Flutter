@@ -3,6 +3,7 @@ import 'package:ai_project/MemberInfo/input_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:kakao_flutter_sdk/all.dart';
 
 class Management extends StatefulWidget {
   const Management({Key? key}) : super(key: key);
@@ -70,17 +71,38 @@ class _ManagementState extends State<Management> {
                 child: RaisedButton(
               child: Text("Logout"),
               onPressed: () {
+                logOutTalk();
+                unlinkTalk();
+                // runtimeType.toString();
+
+                Navigator.of(context).pop();
+                // log.logOutTalk();
+                // log.unlinkTalk();
                 storage.delete(key: "login");
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => KakaoLogin()),
-                // );
-                log.logOutTalk();
               },
             ))
           ],
         ),
       ),
     );
+  }
+
+  logOutTalk() async {
+    print('호출됨!');
+    try {
+      var code = await UserApi.instance.logout();
+      print('logOutTalk code=${code.toString()}');
+    } catch (e) {
+      print('logOutTalk error=${e.toString()}');
+    }
+  }
+
+  unlinkTalk() async {
+    try {
+      var code = await UserApi.instance.unlink();
+      print('unlinkTalk code=${code.toString()}');
+    } catch (e) {
+      print('unlinkTalk error=${e.toString()}');
+    }
   }
 }

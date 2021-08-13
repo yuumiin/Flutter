@@ -1,10 +1,7 @@
-// ignore: file_names
-import 'package:ai_project/CheckDiet/check_diet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
-
 import '../sub_main.dart';
 
 class InputInfo extends StatefulWidget {
@@ -15,9 +12,8 @@ class InputInfo extends StatefulWidget {
 }
 
 class _InputInfoState extends State<InputInfo> {
-  String? _chosenValue;
   int gender_current_seg = 0;
-  int activity_current_seg = 0;
+  int activity_index_current_seg = 0;
 
   TextEditingController member_height = TextEditingController();
   TextEditingController member_weight = TextEditingController();
@@ -41,7 +37,8 @@ class _InputInfoState extends State<InputInfo> {
     print('몸무게:' + member_weight.value.text.toString());
     print('나이:' + member_age.value.text.toString());
     print('성별:' + gender_segments[gender_current_seg].toString());
-    print('활동 지수:' + activity_index_segments[activity_current_seg].toString());
+    print('활동 지수:' +
+        activity_index_segments[activity_index_current_seg].toString());
   }
 
   @override
@@ -51,198 +48,200 @@ class _InputInfoState extends State<InputInfo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('회원정보입력'),
-        backgroundColor: Color(0xFF151026),
-      ),
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      // color: Colors.red,
-                      margin: const EdgeInsets.all(50),
-                      child: const Text(
-                        '개인 맞춤 서비스를 위해\n신체 정보를 꼭 입력해주세요!',
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontFamily: 'NanumSquare',
-                            fontWeight: FontWeight.w500),
-                        textAlign: TextAlign.center,
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('회원정보입력'),
+          backgroundColor: Color(0xFF151026),
+        ),
+        body: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        // color: Colors.red,
+                        margin: const EdgeInsets.all(50),
+                        child: const Text(
+                          '개인 맞춤 서비스를 위해\n신체 정보를 꼭 입력해주세요!',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'NanumSquare',
+                              fontWeight: FontWeight.w500),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                    ),
-                    Container(
-                      height: 1.5,
-                      width: MediaQuery.of(context).size.width,
-                      color: Colors.grey[350],
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 30, right: 30, top: 40),
-                      // alignment: Alignment.topLeft,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            '키',
-                            style: TextStyle(
-                                fontSize: 17, fontFamily: 'NanumSquare'),
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          TextField(
-                            keyboardType: TextInputType.number,
-                            controller: member_height,
-                            decoration: const InputDecoration(
-                                contentPadding: EdgeInsets.all(10),
-                                border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(13)),
-                                ),
-                                labelText: 'cm'),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          const Text(
-                            '체중',
-                            style: TextStyle(
-                                fontSize: 17, fontFamily: 'NanumSquare'),
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          TextField(
-                            keyboardType: TextInputType.number,
-                            controller: member_weight,
-                            decoration: const InputDecoration(
-                                contentPadding: EdgeInsets.all(10),
-                                border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(13)),
-                                ),
-                                labelText: 'kg'),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          const Text(
-                            '나이',
-                            style: TextStyle(
-                                fontSize: 17, fontFamily: 'NanumSquare'),
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          TextField(
-                            keyboardType: TextInputType.number,
-                            controller: member_age,
-                            decoration: const InputDecoration(
-                                contentPadding: EdgeInsets.all(10),
-                                border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(13)),
-                                ),
-                                labelText: '세'),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          const Text(
-                            '성별',
-                            style: TextStyle(
-                                fontSize: 17, fontFamily: 'NanumSquare'),
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            child: Expanded(
-                              child: CupertinoSlidingSegmentedControl<int>(
-                                  padding: EdgeInsets.all(0),
-                                  groupValue: gender_current_seg,
-                                  children: gender_segments,
-                                  onValueChanged: (i) {
-                                    setState(() {
-                                      gender_current_seg = i!;
-                                    });
-                                  }),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          const Text(
-                            '활동지수',
-                            style: TextStyle(
-                                fontSize: 17, fontFamily: 'NanumSquare'),
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            child: Expanded(
-                              child: CupertinoSlidingSegmentedControl<int>(
-                                  padding: EdgeInsets.all(0),
-                                  groupValue: activity_current_seg,
-                                  children: activity_index_segments,
-                                  onValueChanged: (i) {
-                                    setState(() {
-                                      activity_current_seg = i!;
-                                    });
-                                  }),
-                            ),
-                          ),
-                        ],
+                      Container(
+                        height: 1.5,
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.grey[350],
                       ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: SizedBox(
-                // width: double.infinity,
-                width: MediaQuery.of(context).size.width,
-                height: 55,
-                child: FlatButton(
-                  color: Colors.grey[300],
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                    // side: BorderSide(color: Color(0xFF151026), width: 5),
-                  ),
-                  onPressed: () {
-                    text_print();
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => SubMain()));
-                  },
-                  child: Text(
-                    '저장',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 25,
-                        fontFamily: 'NanumSquareRound',
-                        fontWeight: FontWeight.w800),
+                      Container(
+                        margin: EdgeInsets.only(left: 30, right: 30, top: 40),
+                        // alignment: Alignment.topLeft,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              '키',
+                              style: TextStyle(
+                                  fontSize: 17, fontFamily: 'NanumSquare'),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            TextField(
+                              keyboardType: TextInputType.number,
+                              controller: member_height,
+                              decoration: const InputDecoration(
+                                  contentPadding: EdgeInsets.all(10),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(13)),
+                                  ),
+                                  labelText: 'cm'),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            const Text(
+                              '체중',
+                              style: TextStyle(
+                                  fontSize: 17, fontFamily: 'NanumSquare'),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            TextField(
+                              keyboardType: TextInputType.number,
+                              controller: member_weight,
+                              decoration: const InputDecoration(
+                                  contentPadding: EdgeInsets.all(10),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(13)),
+                                  ),
+                                  labelText: 'kg'),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            const Text(
+                              '나이',
+                              style: TextStyle(
+                                  fontSize: 17, fontFamily: 'NanumSquare'),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            TextField(
+                              keyboardType: TextInputType.number,
+                              controller: member_age,
+                              decoration: const InputDecoration(
+                                  contentPadding: EdgeInsets.all(10),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(13)),
+                                  ),
+                                  labelText: '세'),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            const Text(
+                              '성별',
+                              style: TextStyle(
+                                  fontSize: 17, fontFamily: 'NanumSquare'),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: Expanded(
+                                child: CupertinoSlidingSegmentedControl<int>(
+                                    padding: EdgeInsets.all(0),
+                                    groupValue: gender_current_seg,
+                                    children: gender_segments,
+                                    onValueChanged: (i) {
+                                      setState(() {
+                                        gender_current_seg = i!;
+                                      });
+                                    }),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            const Text(
+                              '활동지수',
+                              style: TextStyle(
+                                  fontSize: 17, fontFamily: 'NanumSquare'),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: Expanded(
+                                child: CupertinoSlidingSegmentedControl<int>(
+                                    padding: EdgeInsets.all(0),
+                                    groupValue: activity_index_current_seg,
+                                    children: activity_index_segments,
+                                    onValueChanged: (i) {
+                                      setState(() {
+                                        activity_index_current_seg = i!;
+                                      });
+                                    }),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: SizedBox(
+                  // width: double.infinity,
+                  width: MediaQuery.of(context).size.width,
+                  height: 50,
+                  child: FlatButton(
+                    color: Colors.grey[300],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      // side: BorderSide(color: Color(0xFF151026), width: 5),
+                    ),
+                    onPressed: () {
+                      text_print();
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => SubMain()));
+                    },
+                    child: Text(
+                      '저장',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 22,
+                          fontFamily: 'NanumSquareRound',
+                          fontWeight: FontWeight.w800),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

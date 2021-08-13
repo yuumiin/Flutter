@@ -26,7 +26,7 @@ class Login extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => KakaoLogin()),
               );
-              log.logOutTalk();
+              // log.logOutTalk();
             },
           )
         ],

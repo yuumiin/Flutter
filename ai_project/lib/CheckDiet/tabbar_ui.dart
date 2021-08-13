@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TabBarUI extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
@@ -17,10 +16,9 @@ class TabBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<BottomNavigationBarItem> items = [
-      BottomNavigationBarItem(icon: Icon(Icons.restaurant_rounded)),
-      // BottomNavigationBarItem(icon: Icon(Icons.menu_book_rounded)),
-      BottomNavigationBarItem(icon: Icon(Icons.thumb_down_alt_rounded)),
-      BottomNavigationBarItem(icon: Icon(Icons.add_chart_rounded)),
+      const BottomNavigationBarItem(icon: Icon(Icons.restaurant_rounded)),
+      const BottomNavigationBarItem(icon: Icon(Icons.thumb_down_alt_rounded)),
+      const BottomNavigationBarItem(icon: Icon(Icons.add_chart_rounded)),
     ];
 
     return CupertinoTabScaffold(
