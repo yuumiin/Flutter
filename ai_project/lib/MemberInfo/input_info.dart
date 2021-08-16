@@ -4,6 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import '../sub_main.dart';
 
+// 첫 시작시 회원 정보 입력 받기
 class InputInfo extends StatefulWidget {
   const InputInfo({Key? key}) : super(key: key);
 
@@ -15,6 +16,7 @@ class _InputInfoState extends State<InputInfo> {
   int gender_current_seg = 0;
   int activity_index_current_seg = 0;
 
+  // 사용가자 입력한 값 가져오기 위한 컨트롤러
   TextEditingController member_height = TextEditingController();
   TextEditingController member_weight = TextEditingController();
   TextEditingController member_age = TextEditingController();

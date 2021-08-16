@@ -1,28 +1,11 @@
 PODS:
-  - Alamofire (5.4.3)
   - Flutter (1.0.0)
-  - flutter_kakao_login (1.0.0):
-    - Flutter
-    - KakaoSDKAuth (~> 2.5.2)
-    - KakaoSDKCommon (~> 2.5.2)
-    - KakaoSDKUser (~> 2.5.2)
   - flutter_secure_storage (3.3.1):
     - Flutter
   - image_picker (0.0.1):
     - Flutter
   - kakao_flutter_sdk (0.7.1):
     - Flutter
-  - KakaoSDKAuth (2.5.6):
-    - KakaoSDKCommon (= 2.5.6)
-  - KakaoSDKCommon (2.5.6):
-    - KakaoSDKCommon/Common (= 2.5.6)
-    - KakaoSDKCommon/Network (= 2.5.6)
-  - KakaoSDKCommon/Common (2.5.6)
-  - KakaoSDKCommon/Network (2.5.6):
-    - Alamofire (~> 5.1)
-    - KakaoSDKCommon/Common (= 2.5.6)
-  - KakaoSDKUser (2.5.6):
-    - KakaoSDKAuth (= 2.5.6)
   - package_info (0.0.1):
     - Flutter
   - package_info_plus (0.4.5):
@@ -36,7 +19,6 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - flutter_kakao_login (from `.symlinks/plugins/flutter_kakao_login/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - kakao_flutter_sdk (from `.symlinks/plugins/kakao_flutter_sdk/ios`)
@@ -46,18 +28,9 @@ DEPENDENCIES:
   - share (from `.symlinks/plugins/share/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
 
-SPEC REPOS:
-  trunk:
-    - Alamofire
-    - KakaoSDKAuth
-    - KakaoSDKCommon
-    - KakaoSDKUser
-
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  flutter_kakao_login:
-    :path: ".symlinks/plugins/flutter_kakao_login/ios"
   flutter_secure_storage:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
   image_picker:
@@ -76,15 +49,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences/ios"
 
 SPEC CHECKSUMS:
-  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
-  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
-  flutter_kakao_login: 46eae417e1086f27d0e8fdeabbc236909c3098f3
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   flutter_secure_storage: 7953c38a04c3fdbb00571bcd87d8e3b5ceb9daec
   image_picker: e06f7a68f000bd36f552c1847e33cda96ed31f1f
   kakao_flutter_sdk: b783e0a36aa17736f51457e0fc45e4a718161d38
-  KakaoSDKAuth: 1e1fa737e78eed3f301ab5c164526781a37a42f9
-  KakaoSDKCommon: cdf340a8f671eef75f4ca012003cb350af3c4b6d
-  KakaoSDKUser: f488aa4699b3fd3a836ab5c7e25e2cb4cea190c1
   package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
   package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c

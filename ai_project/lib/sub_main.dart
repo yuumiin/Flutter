@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:motion_tab_bar_v2/motion-badge.widget.dart';
 import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
 
 import 'CheckDiet/check_diet.dart';
+import 'StatsDiet/diet_graph.dart';
+import 'RecommendDiet/diet_recommend.dart';
 import 'MemberInfo/input_info.dart';
 
+// 조회, 추천, 통계 페이지 전환을 위한 UI
 class SubMain extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -15,45 +17,6 @@ class SubMain extends StatefulWidget {
 }
 
 class _SubMain extends State<SubMain> with TickerProviderStateMixin {
-  // CupertinoTabBar? tabBar;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   tabBar = CupertinoTabBar(items: <BottomNavigationBarItem>[
-  //     BottomNavigationBarItem(icon: Icon(Icons.restaurant_rounded)),
-  //     BottomNavigationBarItem(icon: Icon(Icons.thumb_up_alt_rounded)),
-  //     BottomNavigationBarItem(icon: Icon(Icons.add_chart_rounded)),
-  //   ]);
-  // }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return CupertinoApp(
-  //     localizationsDelegates: [
-  //       DefaultMaterialLocalizations.delegate,
-  //       DefaultCupertinoLocalizations.delegate,
-  //       DefaultWidgetsLocalizations.delegate,
-  //     ],
-  //     home: CupertinoTabScaffold(
-  //         tabBar: tabBar!,
-  //         tabBuilder: (context, value) {
-  //           switch (value) {
-  //             case 0:
-  //               return CheckDiet();
-  //             case 1:
-  //               return InputInfo();
-  //             case 2:
-  //               return Container(
-  //                 child: Text('통계'),
-  //               );
-  //             default:
-  //               return CheckDiet();
-  //           }
-  //         }),
-  //   );
-  // }
-
   TabController? _tabController;
 
   @override
@@ -83,29 +46,7 @@ class _SubMain extends State<SubMain> with TickerProviderStateMixin {
           Icons.thumb_up_alt_rounded,
           Icons.add_chart_rounded,
         ],
-        // badges: [
-        //   Container(
-        //     child: const MotionBadgeWidget(
-        //       textColor: Colors.red, // optional, default to Colors.white
-        //       color: Colors.red, // optional, default to Colors.red
-        //       size: 18, // optional, default to 18
-        //     ),
-        //   ),
-        //   Container(
-        //     child: const MotionBadgeWidget(
-        //       textColor: Colors.white, // optional, default to Colors.white
-        //       color: Colors.red, // optional, default to Colors.red
-        //       size: 18, // optional, default to 18
-        //     ),
-        //   ),
-        //   Container(
-        //     child: const MotionBadgeWidget(
-        //       textColor: Colors.white, // optional, default to Colors.white
-        //       color: Colors.red, // optional, default to Colors.red
-        //       size: 18, // optional, default to 18
-        //     ),
-        //   )
-        // ],
+
         tabSize: 50, // 탭바 버튼 눌렀을 때 동그라미 크기
         tabBarHeight: 55,
         textStyle: const TextStyle(
@@ -134,13 +75,9 @@ class _SubMain extends State<SubMain> with TickerProviderStateMixin {
         controller: _tabController,
         // ignore: prefer_const_literals_to_create_immutables
         children: <Widget>[
-          const CheckDiet(),
-          const Center(
-            child: Text("식단추천"),
-          ),
-          const Center(
-            child: Text("통계"),
-          ),
+          const CheckDiet(), //식단조회 버튼 누를 시 CheckDiet 함수 실행
+          const DietRecommend(),
+          const DietGraph(), //식단통계 버튼 누를 시 DietGraph 함수 실행
         ],
       ),
     );

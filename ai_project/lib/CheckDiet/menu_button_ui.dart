@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:menu_button/menu_button.dart';
 
+// 조회페이지에서 선택할 식사 시간 메뉴 버튼 UI
 class NormalMenuButton extends StatefulWidget {
   const NormalMenuButton({
     Key? key,
-    required this.theme,
   }) : super(key: key);
-
-  final ThemeData theme;
 
   @override
   _NormalMenuButtonState createState() => _NormalMenuButtonState();

@@ -1,152 +1,18 @@
 import 'dart:io';
-import 'package:ai_project/CheckDiet/check_diet.dart';
 import 'package:ai_project/MemberInfo/management.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:group_button/group_button.dart';
 import 'package:image_picker/image_picker.dart';
 
-class AddButton extends StatefulWidget {
-  const AddButton({Key? key}) : super(key: key);
-
-  @override
-  _AddButtonState createState() => _AddButtonState();
-}
-
-class _AddButtonState extends State<AddButton> {
-  var renderOverlay = true;
-  var visible = true;
-  var switchLabelPosition = false;
-  var extend = false; // true로 하면 타원모양됨
-  var rmicons = false;
-  var customDialRoot = false;
-  var closeManually = false;
-  var useRAnimation = true;
-  var isDialOpen = ValueNotifier<bool>(false);
-  var speedDialDirection = SpeedDialDirection.Up;
-  var selectedfABLocation = FloatingActionButtonLocation.endFloat;
-
-  File? image;
-  final picker = ImagePicker();
-
-  @override
-  void setState(VoidCallback fn) {
-    super.setState(fn);
-    if (image != null) {
-      change();
-    }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    Future pickImage(ImageSource source) async {
-      try {
-        final image = await ImagePicker().pickImage(source: source);
-        if (image == null) return;
-
-        final imageTemporary = File(image.path);
-        setState(() {
-          this.image = imageTemporary;
-        });
-      } on PlatformException catch (e) {
-        print('Failed to picl image: $e');
-      }
-    }
-
-    return WillPopScope(
-      onWillPop: () async {
-        if (isDialOpen.value) {
-          isDialOpen.value = false;
-          return false;
-        }
-        return true;
-      },
-      child: SpeedDial(
-        icon: Icons.add_rounded,
-        activeIcon: Icons.close_rounded,
-        backgroundColor: Colors.blue[900],
-        spacing: 3,
-        openCloseDial: isDialOpen,
-        childPadding: EdgeInsets.all(5),
-        spaceBetweenChildren: 4,
-        buttonSize: 56,
-        iconTheme: IconThemeData(size: 33),
-
-        label: extend ? Text("Open") : null,
-        activeLabel: extend ? Text("Close") : null,
-
-        childrenButtonSize: 56.0,
-        visible: visible,
-        direction: speedDialDirection,
-        switchLabelPosition: switchLabelPosition,
-
-        closeManually: closeManually,
-
-        renderOverlay: renderOverlay,
-        onOpen: () => print('OPENING DIAL'),
-        onClose: () => print('DIAL CLOSED'),
-        useRotationAnimation: useRAnimation,
-        elevation: 8.0,
-        isOpenOnStart: false,
-        animationSpeed: 200, // + 아이콘 돌아가는 속도
-        // childMargin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        children: [
-          SpeedDialChild(
-            child: !rmicons ? Icon(Icons.add_a_photo_rounded) : null,
-            backgroundColor: Colors.indigo, // 버튼 배경 색
-            foregroundColor: Colors.white, // 아이콘 색
-            label: '카메라로 추가하기',
-            onTap: () => {
-              print("카메라"),
-              pickImage(ImageSource.camera),
-            },
-          ),
-          SpeedDialChild(
-            child: !rmicons ? Icon(Icons.collections_rounded) : null,
-            backgroundColor: Colors.indigo,
-            foregroundColor: Colors.white,
-            label: '앨범에서 불러오기',
-            onTap: () => {
-              print("앨범"),
-              pickImage(ImageSource.gallery),
-              // image != null ? change() : FlutterLogo(),
-            },
-          ),
-          SpeedDialChild(
-            child: !rmicons ? Icon(Icons.post_add_rounded, size: 30) : null,
-            backgroundColor: Colors.indigo,
-            foregroundColor: Colors.white,
-            label: '텍스트로 추가하기',
-            visible: true,
-            onTap: () => ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(("텍스트")))),
-          ),
-        ],
-      ),
-    );
-  }
-
-  change() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => WriteDiet(image!)),
-    );
-  }
-}
-
 class WriteDiet extends StatefulWidget {
-  WriteDiet(this.image);
-  final File image;
+  // final pickedFile food_image;
+  final File food_image;
+  const WriteDiet({Key? key, required this.food_image}) : super(key: key);
 
   @override
-  State<WriteDiet> createState() => _WriteDietState();
+  _WriteDietState createState() => _WriteDietState();
 }
 
 class _WriteDietState extends State<WriteDiet> {
@@ -155,15 +21,12 @@ class _WriteDietState extends State<WriteDiet> {
   TextEditingController day_value = TextEditingController();
   File? new_image; // 다시 선택하기 버튼 누를 때 불러올 이미지 변수
 
-  Future pickImage(ImageSource source) async {
+  Future pickImage(ImageSource imageSource) async {
     try {
-      final image = await ImagePicker().pickImage(source: source);
-      if (image == null) return;
-
-      final imageTemporary = File(image.path);
-      setState(() {
-        this.new_image = imageTemporary;
-      });
+      PickedFile? f = await ImagePicker.platform.pickImage(source: imageSource);
+      File img_file = File(f!.path);
+      print(img_file);
+      setState(() => new_image = img_file);
     } on PlatformException catch (e) {
       print('Failed to picl image: $e');
     }
@@ -214,7 +77,7 @@ class _WriteDietState extends State<WriteDiet> {
                             fit: BoxFit.fill,
                           )
                         : Image.file(
-                            widget.image,
+                            widget.food_image,
                             fit: BoxFit.fill,
                           ),
                   ),
@@ -392,9 +255,7 @@ class _WriteDietState extends State<WriteDiet> {
                     borderRadius: BorderRadius.circular(30.0),
                     // side: BorderSide(color: Color(0xFF151026), width: 5),
                   ),
-                  onPressed: () {
-                    return_image();
-                  },
+                  onPressed: () {},
                   child: const Text(
                     '등록',
                     style: TextStyle(
@@ -410,11 +271,5 @@ class _WriteDietState extends State<WriteDiet> {
         ),
       ),
     );
-  }
-
-  return_image() {
-    new_image == null
-        ? Navigator.of(context).pushNamed('/second', arguments: widget.image)
-        : Navigator.of(context).pushNamed('/second', arguments: new_image);
   }
 }

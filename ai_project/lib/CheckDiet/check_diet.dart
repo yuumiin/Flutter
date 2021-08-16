@@ -1,19 +1,13 @@
-// import 'package:ai_project/CheckDiet/dropdown_ui.dart';
-import 'dart:io';
-
-import 'package:ai_project/CheckDiet/add_diet.dart';
+import 'package:ai_project/CheckDiet/image_load_button.dart';
 import 'package:ai_project/MemberInfo/management.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'menu_button_ui.dart';
-import 'package:image_picker/image_picker.dart';
 
+// 조회 페이지 UI
 class CheckDiet extends StatefulWidget {
-  // CheckDiet(this.image);
-  // final File image;
   const CheckDiet({Key? key}) : super(key: key);
   @override
   _CheckDietState createState() => _CheckDietState();
@@ -22,12 +16,9 @@ class CheckDiet extends StatefulWidget {
 class _CheckDietState extends State<CheckDiet>
     with AutomaticKeepAliveClientMixin {
   String _date = "날짜 선택";
-  final _valueList = ['아침', '점심', '저녁'];
-  var _selectedValue;
   CupertinoTabBar? tabBar;
 
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 
   @override
@@ -37,9 +28,6 @@ class _CheckDietState extends State<CheckDiet>
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final File returnImage = ModalRoute.of(context)!.settings.arguments as File;
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -60,7 +48,7 @@ class _CheckDietState extends State<CheckDiet>
           ),
         ], // 1개 이상의 위젯 리스트를 가짐
       ),
-      floatingActionButton: AddButton(),
+      floatingActionButton: ImageLoadButton(),
       body: Container(
         child: Column(
           children: [
@@ -91,8 +79,7 @@ class _CheckDietState extends State<CheckDiet>
                             side: const BorderSide(
                                 width: 1.5, color: Colors.grey),
                             shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(15), // <-- Radius
+                              borderRadius: BorderRadius.circular(15),
                             ),
                           ),
                         ),
@@ -106,9 +93,7 @@ class _CheckDietState extends State<CheckDiet>
                               const BorderRadius.all(Radius.circular(15)),
                         ),
                         margin: const EdgeInsets.only(left: 8, right: 8),
-                        child: NormalMenuButton(
-                          theme: theme,
-                        ),
+                        child: NormalMenuButton(),
                       ),
                     ),
                     Container(
@@ -140,10 +125,6 @@ class _CheckDietState extends State<CheckDiet>
               width: MediaQuery.of(context).size.width - 20,
               color: Colors.grey[350],
             ),
-            // Image.file(
-            //   returnImage,
-            //   fit: BoxFit.fill,
-            // ),
           ],
         ),
       ),
@@ -151,7 +132,6 @@ class _CheckDietState extends State<CheckDiet>
   }
 
   datePicker(context) {
-    String _textfield_date = "";
     DatePicker.showDatePicker(context,
         theme: DatePickerTheme(
           containerHeight: 210.0,
